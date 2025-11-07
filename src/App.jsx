@@ -136,7 +136,13 @@ const App = () => {
         <section className="grid grid-cols-1 lg:grid-cols-4 gap-8">
           <aside className="lg:col-span-1 space-y-8">
             <div className="bg-white p-6 rounded-lg shadow-md">
-              <EventFilters filters={filters} categoryOptions={['Todos', ...categoryOptions]} publicOptions={['Todos', ...publicOptions]} onChange={setFilters} onClearDate={() => setFilters((c) => ({ ...c, selectedDate: null }))} />
+              <EventFilters
+                value={filters}
+                onChange={setFilters}
+                categories={['Todos', ...Array.from(categoryOptions)]}
+                publicOptions={['Todos', ...Array.from(publicOptions)]}
+                onClearDate={() => setFilters((c) => ({ ...c, selectedDate: null }))}
+              />
             </div>
             <div className="bg-white p-6 rounded-lg shadow-md">
               <UpcomingEvents events={upcomingEvents} onSelect={setDetailEventId} />
