@@ -30,7 +30,7 @@ export default function LoginForm({ onLogin, onCancel }) {
             id="username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
-            placeholder="admin"
+            placeholder=""
             className="w-full border rounded-md px-3 py-2 text-gray-900 border-gray-300 focus:ring-blue-500 focus:border-blue-500"
             aria-label="Usuario"
             autoFocus
