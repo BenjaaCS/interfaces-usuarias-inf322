@@ -41,7 +41,24 @@ export default function EventForm({ mode, initialValues, onSubmit, onCancel }) {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+
+    // --- INICIO DE LA LÓGICA MODIFICADA ---
+    if (name === "startDate") {
+      // Si la nueva fecha de inicio es posterior a la fecha de fin actual,
+      // actualizamos también la fecha de fin para que sea igual a la de inicio.
+      if (value > formData.endDate && formData.endDate) {
+        setFormData((prev) => ({
+          ...prev,
+          startDate: value,
+          endDate: value,
+        }));
+      } else {
+        setFormData((prev) => ({ ...prev, [name]: value }));
+      }
+    } else {
+      setFormData((prev) => ({ ...prev, [name]: value }));
+    }
+    // --- FIN DE LA LÓGICA MODIFICADA ---
   };
 
   const handleSubmit = (e) => {
@@ -103,7 +120,18 @@ export default function EventForm({ mode, initialValues, onSubmit, onCancel }) {
           </div>
           <div>
             <label htmlFor="endDate" className="block text-sm font-medium mb-1">Fecha de fin <span className="text-red-500">*</span></label>
-            <input type="date" id="endDate" name="endDate" value={formData.endDate} onChange={handleChange} className={inputClassName} required />
+            {/* --- CAMBIO PRINCIPAL AQUÍ --- */}
+            <input 
+              type="date" 
+              id="endDate" 
+              name="endDate" 
+              value={formData.endDate} 
+              onChange={handleChange} 
+              min={formData.startDate} // Se añade la propiedad 'min'
+              disabled={!formData.startDate} // Opcional: deshabilita si no hay fecha de inicio
+              className={inputClassName} 
+              required 
+            />
           </div>
           <div>
             <label htmlFor="time" className="block text-sm font-medium mb-1">Hora <span className="text-red-500">*</span></label>
