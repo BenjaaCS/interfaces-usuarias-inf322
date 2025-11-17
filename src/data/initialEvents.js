@@ -20,7 +20,8 @@ export const initialEvents = [
     status: 'Programado',
     duration: '1 hora',
     organizerUnit: 'Departamento Academico',
-    specificDepartment: 'Escuela de Ingenieria'
+    specificDepartment: 'Escuela de Ingenieria',
+    imageUrl:'https://www.uma.es/media/fotos/Think6_Tour_ETSIT_UMA.jpg'
   },
   {
     id: 'ev2',
@@ -35,7 +36,8 @@ export const initialEvents = [
     status: 'Programado',
     duration: 'Dia completo',
     organizerUnit: 'Departamento Academico',
-    specificDepartment: 'Escuela de Ingenieria'
+    specificDepartment: 'Escuela de Ingenieria',
+    imageUrl:'https://doctoradoia.cl/wp-content/uploads/2024/08/Congreso-HacIA-donde-vamos-03-banner.png'
   },
   {
     id: 'ev3',
@@ -50,7 +52,8 @@ export const initialEvents = [
     status: 'Programado',
     duration: '2 horas',
     organizerUnit: 'Departamento Academico',
-    specificDepartment: 'Escuela de Ingenieria'
+    specificDepartment: 'Escuela de Ingenieria',
+    imageUrl:'https://usm.cl/wp-content/uploads/2025/02/ceremonia-bienvenida-2025.png'
   }
 ];
 

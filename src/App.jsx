@@ -175,7 +175,7 @@ const App = () => {
         day: 'numeric',
         month: 'long',
       })}`
-    : 'Todos los eventos';
+    : '';
 
   // --- Render ---
   return (
@@ -194,48 +194,11 @@ const App = () => {
         onOpenCreate={openCreateModal}
       />
 
-      {/* HERO / DESCRIPCIÓN DEL SISTEMA */}
-      <section className="bg-white border-b">
-        <div className="max-w-6xl mx-auto px-4 py-8 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
-          <div>
-            <p className="text-xs font-semibold text-blue-700 uppercase tracking-wide">
-              USM Event Tracker
-            </p>
-            <h1 className="mt-1 text-3xl font-bold text-gray-900">
-              Eventos USM
-            </h1>
-            <p className="mt-2 text-gray-600 max-w-xl">
-              Encuentra, organiza y promociona actividades académicas, deportivas
-              y culturales de la Universidad Técnica Federico Santa María.
-            </p>
-          </div>
 
-          <div className="flex flex-col items-start md:items-end gap-2">
-            <p className="text-sm text-gray-500 text-right">
-              {currentTitle}
-            </p>
-            {loggedIn ? (
-              <button
-                onClick={openCreateModal}
-                className="inline-flex items-center px-4 py-2 rounded-lg bg-blue-700 text-white text-sm font-semibold hover:bg-blue-800 transition-colors"
-              >
-                Crear nuevo evento
-              </button>
-            ) : (
-              <button
-                onClick={() => setLoginModalOpen(true)}
-                className="inline-flex items-center px-4 py-2 rounded-lg border border-blue-700 text-blue-700 text-sm font-semibold hover:bg-blue-50 transition-colors"
-              >
-                Iniciar sesión como administrador
-              </button>
-            )}
-          </div>
-        </div>
-      </section>
 
       {/* CUERPO PRINCIPAL: 2/3 LISTADO + 1/3 LATERAL */}
       <main className="flex-1 bg-gray-100">
-        <div className="max-w-6xl mx-auto px-4 py-6 grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="max-w-7xl mx-auto px-4 py-6 grid grid-cols-1 md:grid-cols-3 gap-6">
           {/* Columna principal */}
           <section className="md:col-span-2 space-y-4">
             <div className="bg-white p-6 rounded-lg shadow-md">

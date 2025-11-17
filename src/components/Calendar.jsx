@@ -53,10 +53,10 @@ const Calendar = ({
       </div>
       <div className="grid grid-cols-7 gap-1 text-xs">
         {matrix.map((cell) => {
-          const dayEvents = (eventsByDay[cell.iso] || []).slice(0, 2);
-          const hasMore = (eventsByDay[cell.iso] || []).length - dayEvents.length;
+          const dayEvents = eventsByDay[cell.iso] || [];
+          const hasEvents = dayEvents.length > 0;
           const isSelected = selectedDate === cell.iso;
-          const baseClasses = 'calendar-day rounded border min-h-[90px] flex flex-col gap-1 p-2 cursor-pointer';
+          const baseClasses = 'calendar-day rounded border aspect-square flex flex-col items-center justify-start pt-2 gap-1 p-1 sm:p-2 cursor-pointer relative';
           const variant = cell.inCurrentMonth ? 'bg-white hover:border-blue-300' : 'bg-gray-50 text-gray-400';
           const selected = isSelected ? 'border-blue-500 ring-2 ring-blue-200' : '';
           return (
@@ -66,20 +66,10 @@ const Calendar = ({
               onClick={() => onSelectDate(cell.iso)}
               data-date={cell.iso}
             >
-              <span className="day-number text-sm font-semibold">{cell.day}</span>
-              <div className="flex flex-col gap-1">
-                {dayEvents.map((event) => (
-                  <span
-                    key={event.id}
-                    className="text-[11px] px-2 py-1 rounded bg-blue-100 text-blue-800 truncate"
-                  >
-                    {event.title}
-                  </span>
-                ))}
-                {hasMore > 0 && (
-                  <span className="text-[11px] text-gray-500">+{hasMore} mas</span>
-                )}
-              </div>
+              <span className="day-number text-xs sm:text-sm font-semibold">{cell.day}</span>
+              {hasEvents && (
+                <span className="absolute bottom-1 left-1/2 -translate-x-1/2 h-2 w-2 rounded-full bg-blue-500"></span>
+              )}
             </div>
           );
         })}

@@ -12,7 +12,10 @@ const initialFormState = {
   specificDepartment: '',
   startDate: '',
   endDate: '',
-  time: '',
+  startTime: '',
+  endTime: '',
+  status: 'Programado',
+  imageUrl: '',
 };
 
 export default function EventForm({ mode, initialValues, onSubmit, onCancel }) {
@@ -32,7 +35,10 @@ export default function EventForm({ mode, initialValues, onSubmit, onCancel }) {
         // Aseguramos que las fechas tengan el formato correcto para el input type="date"
         startDate: initialValues.startDate?.split('T')[0] || '',
         endDate: initialValues.endDate?.split('T')[0] || '',
-        time: initialValues.time || '',
+        startTime: initialValues.startTime || '',
+        endTime: initialValues.endTime || '',
+        status: initialValues.status || 'Programado',
+        imageUrl: initialValues.imageUrl || '',
       });
     } else {
       setFormData(initialFormState);
@@ -133,20 +139,41 @@ export default function EventForm({ mode, initialValues, onSubmit, onCancel }) {
               required 
             />
           </div>
-          <div>
-            <label htmlFor="time" className="block text-sm font-medium mb-1">Hora <span className="text-red-500">*</span></label>
-            <input type="text" id="time" name="time" value={formData.time} onChange={handleChange} placeholder="Ej: 15:00 - 17:00" className={inputClassName} required />
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label htmlFor="startTime" className="block text-sm font-medium mb-1">
+                Hora de inicio <span className="text-red-500"></span>
+              </label>
+              <input
+                type="time"
+                id="startTime"
+                name="startTime"
+                value={formData.startTime}
+                onChange={handleChange}
+                className={inputClassName}
+                required
+              />
+            </div>
+
+            <div>
+              <label htmlFor="endTime" className="block text-sm font-medium mb-1">
+                Hora de término <span className="text-red-500">*</span>
+              </label>
+              <input
+                type="time"
+                id="endTime"
+                name="endTime"
+                value={formData.endTime}
+                onChange={handleChange}
+                className={inputClassName}
+                required
+              />
+            </div>
           </div>
-          <div>
-            <label htmlFor="campus" className="block text-sm font-medium mb-1">Campus o Sede <span className="text-red-500">*</span></label>
-            <select id="campus" name="campus" value={formData.campus} onChange={handleChange} className={inputClassName} required>
-                <option value="" disabled>Seleccionar...</option>
-                <option>Casa Central Valparaíso</option>
-                <option>Campus Santiago San Joaquín</option>
-                <option>Campus Santiago Vitacura</option>
-                <option>Sede Viña del Mar</option>
-            </select>
-          </div>
+
+          <p className="mt-1 text-xs text-gray-500">
+            Usa formato de 24 horas (por ejemplo, 15:00 a 17:00).
+          </p>
         </div>
       </div>
 
@@ -164,6 +191,31 @@ export default function EventForm({ mode, initialValues, onSubmit, onCancel }) {
           </div>
         </div>
       </div>
+      <div>
+        <label
+          htmlFor="imageUrl"
+          className="block text-sm font-medium mb-1"
+        >
+          Imagen del evento (URL, opcional)
+        </label>
+        <input
+          type="url"
+          id="imageUrl"
+          name="imageUrl"
+          value={formData.imageUrl}
+          onChange={handleChange}
+          placeholder="https://... (afiche del evento)"
+          className={inputClassName}
+        />
+        <p className="mt-1 text-xs text-gray-500">
+          Esta imagen se mostrará en la tarjeta del evento, similar a usm.cl/eventos.
+        </p>
+      </div>
+
+
+
+
+
 
       {/* --- BOTONES DE ACCIÓN --- */}
       <div className="flex justify-end gap-4 pt-4">
@@ -174,6 +226,8 @@ export default function EventForm({ mode, initialValues, onSubmit, onCancel }) {
           {mode === 'edit' ? 'Guardar Cambios' : 'Crear Evento'}
         </button>
       </div>
+
+      
     </form>
   );
 }
